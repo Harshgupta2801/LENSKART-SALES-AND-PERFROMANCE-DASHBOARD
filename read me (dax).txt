@@ -1,0 +1,60 @@
+🧮 DAX Calculations
+🔹 Calculated Columns
+
+🧩 Composite Key (Used for Relationship)
+
+👉 Created in both tables to establish relationship between Daily Summary and Transactions
+
+Daily_Summary Table
+
+Key = Daily_Summary[Date] & "-" & Daily_Summary[Store]
+
+Transactions Table
+
+Key = Transactions[Date] & "-" & Transactions[Store]
+
+📌 Purpose:
+Since there was no single common column, a composite key (Date + Store) was created to link both tables.
+
+📅 Day Column (Transactions Table)
+
+Day = FORMAT(Transactions[Date], "dddd")
+
+📌 Purpose:
+Used to analyze sales by weekday vs weekend.
+
+🔹 Measures
+
+💰 Total Sales
+
+Total Sales = SUM(Transactions[Rate])
+
+📦 Total Orders
+
+Total Orders = COUNT(Transactions[Order ID])
+
+🚶 Total Footfall
+
+Total Footfall = SUM(Daily_Summary[Footfall])
+
+🧾 Average Bill Value (ABV)
+
+ABV = DIVIDE([Total Sales], [Total Orders])
+
+🎯 Conversion Rate
+
+Conversion Rate = DIVIDE([Total Orders], [Total Footfall])
+🔗 Data Model (Relationship)
+
+Transactions[Key] → Daily_Summary[Key] (Many-to-One)
+
+📌 Explanation:
+A relationship was created using the composite key (Date + Store) to connect transaction data with daily summary data (footfall).
+
+This allows:
+
+Accurate calculation of Conversion Rate
+
+Proper filtering across visuals
+
+Combining sales and footfall insights
